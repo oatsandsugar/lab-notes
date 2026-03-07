@@ -87,8 +87,8 @@ const LAB = (() => {
       `}
 
       <div class="doc-footer">
-        <span>Lab Notes Archive</span>
-        <span>${new Date().getFullYear()}</span>
+        <span>(c) <a href="https://github.com/oatsandsugar" target="_blank" rel="noopener">@oatsandsugar</a> ${new Date().getFullYear()} — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span>
+        <span><a href="https://far-horizons-co-op.itch.io/outliers" target="_blank" rel="noopener">Outliers</a> by Far Horizons Co-op</span>
       </div>
     `;
 
@@ -202,20 +202,18 @@ const LAB = (() => {
       </div>
 
       <nav class="doc-nav">
-        <button class="doc-nav__btn ${!hasPrev ? 'doc-nav__btn--disabled' : ''}"
-                ${!hasPrev ? 'disabled' : ''} data-action="prev">
-          &#9664; Prev
-        </button>
-        <span class="doc-nav__counter">${padId(entry.id)} / ${padId(entries.length)}</span>
-        <button class="doc-nav__btn ${!hasNext ? 'doc-nav__btn--disabled' : ''}"
-                ${!hasNext ? 'disabled' : ''} data-action="next">
-          Next &#9654;
-        </button>
+        <div class="doc-nav__controls">
+          <button class="doc-nav__btn ${!hasPrev ? 'doc-nav__btn--disabled' : ''}"
+                  ${!hasPrev ? 'disabled' : ''} data-action="prev">&#9664;</button>
+          <button class="doc-nav__btn" data-action="index">&#9633;</button>
+          <button class="doc-nav__btn ${!hasNext ? 'doc-nav__btn--disabled' : ''}"
+                  ${!hasNext ? 'disabled' : ''} data-action="next">&#9654;</button>
+        </div>
       </nav>
 
       <div class="doc-footer">
-        <span><a href="#" class="doc-nav__btn" data-action="index" style="border:none;padding:0;letter-spacing:0.1em;">&#9633; Index</a></span>
-        <span>Page ${index + 1} of ${entries.length}</span>
+        <span>(c) <a href="https://github.com/oatsandsugar" target="_blank" rel="noopener">@oatsandsugar</a> ${new Date().getFullYear()} — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span>
+        <span><a href="https://far-horizons-co-op.itch.io/outliers" target="_blank" rel="noopener">Outliers</a> by Far Horizons Co-op</span>
       </div>
     `;
 
@@ -304,6 +302,10 @@ const LAB = (() => {
           <button class="doc-nav__btn splash__enter" id="splash-enter">
             Enter Archive
           </button>
+        </div>
+
+        <div class="splash__license">
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>
         </div>
 
         <div class="doc-footer">

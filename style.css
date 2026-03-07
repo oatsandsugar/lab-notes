@@ -291,7 +291,7 @@ body {
   gap: 24px;
   padding-top: 24px;
   border-top: var(--rule-weight-heavy) solid var(--black);
-  margin-bottom: 40px;
+  margin-bottom: 16px;
 }
 
 .signature-block__field {
@@ -322,47 +322,48 @@ body {
 
 .doc-nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 16px 0;
-  border-top: var(--rule-weight) solid var(--grey-300);
-  margin-top: 40px;
+  padding: 12px 0;
+  border-top: none;
+  margin-top: 8px;
+}
+
+.doc-nav__counter {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--grey-500);
+  letter-spacing: 0.05em;
+}
+
+.doc-nav__controls {
+  display: flex;
+  gap: 0;
 }
 
 .doc-nav__btn {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.75rem;
   background: none;
-  border: var(--rule-weight) solid var(--black);
-  padding: 8px 16px;
+  border: none;
+  padding: 7px 14px;
   cursor: pointer;
   color: var(--black);
   transition: background 0.15s, color 0.15s;
   text-decoration: none;
   display: inline-block;
+  line-height: 1;
 }
 
 .doc-nav__btn:hover {
-  background: var(--black);
-  color: var(--white);
+  color: var(--grey-500);
 }
 
 .doc-nav__btn:disabled,
 .doc-nav__btn--disabled {
-  border-color: var(--grey-300);
   color: var(--grey-300);
   cursor: default;
   pointer-events: none;
-}
-
-.doc-nav__counter {
-  font-size: 0.7rem;
-  font-weight: 400;
-  color: var(--grey-500);
-  letter-spacing: 0.05em;
 }
 
 /* ── INDEX / TOC ── */
@@ -410,16 +411,18 @@ body {
 /* ── DOCUMENT FOOTER ── */
 
 .doc-footer {
-  padding-top: 16px;
+  padding-top: 10px;
   border-top: var(--rule-weight) solid var(--grey-300);
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 12px;
   font-size: 0.6rem;
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--grey-400);
-  margin-top: 48px;
+  margin-top: 8px;
 }
 
 /* ── EMPTY STATE ── */
@@ -612,4 +615,32 @@ body {
 
 .splash__enter {
   margin-top: 24px;
+}
+
+.doc-footer a {
+  color: var(--grey-400);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.doc-footer a:hover {
+  color: var(--black);
+}
+
+.splash__license {
+  margin-top: 24px;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey-400);
+}
+
+.splash__license a {
+  color: var(--grey-400);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.splash__license a:hover {
+  color: var(--black);
 }
