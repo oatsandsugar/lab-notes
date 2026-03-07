@@ -103,6 +103,12 @@ body {
   text-transform: uppercase;
   color: var(--grey-500);
   line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.doc-header__org:hover {
+  color: var(--black);
 }
 
 .doc-header__classification {

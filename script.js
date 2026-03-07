@@ -132,10 +132,10 @@ const LAB = (() => {
 
     content.innerHTML = `
       <div class="doc-header">
-        <div class="doc-header__org">
+        <a href="#" class="doc-header__org" data-action="index">
           Research Division<br>
           Document No. ${formatDocNum(entry)}
-        </div>
+        </a>
         <div class="doc-header__classification">Internal</div>
       </div>
 
