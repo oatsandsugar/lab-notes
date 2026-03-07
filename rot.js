@@ -284,7 +284,8 @@ const ROT = (() => {
 
   // ── Master apply function ──
 
-  function apply(entryId, rotLevel, pageFrame) {
+  function apply(entryId, rotLevel, pageFrame, opts = {}) {
+    const { animate = true } = opts;
     // Clean previous rot
     clean(pageFrame);
 
@@ -296,14 +297,18 @@ const ROT = (() => {
     // Set data attribute for CSS hooks
     pageFrame.dataset.rot = intensity;
 
-    // Apply layers in order (each consumes rng calls, ensuring deterministic variation)
-    applyPageDistortion(pageFrame, rng, intensity);
+    // Text-level corruption always applies (it's data rot, not animation)
     corruptMetadata(pageFrame, rng, intensity);
     corruptTextNodes(pageFrame, rng, intensity);
-    displaceElements(pageFrame, rng, intensity);
-    addTearLines(pageFrame, rng, intensity);
-    addBlackBars(pageFrame, rng, intensity);
-    addFlickerEffects(pageFrame, rng, intensity);
+
+    // Visual/motion effects only when animations enabled
+    if (animate) {
+      applyPageDistortion(pageFrame, rng, intensity);
+      displaceElements(pageFrame, rng, intensity);
+      addTearLines(pageFrame, rng, intensity);
+      addBlackBars(pageFrame, rng, intensity);
+      addFlickerEffects(pageFrame, rng, intensity);
+    }
   }
 
   function clean(pageFrame) {

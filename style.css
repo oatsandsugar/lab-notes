@@ -537,3 +537,79 @@ body {
 [data-rot] .rot-ghost {
   filter: blur(1px);
 }
+
+/* ── NO ANIMATIONS MODE ── */
+
+.no-animations *,
+.no-animations *::before,
+.no-animations *::after {
+  animation-duration: 0s !important;
+  transition-duration: 0s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
+}
+
+/* ── SPLASH SCREEN ── */
+
+.splash__body {
+  padding: 32px 0;
+}
+
+.splash__body a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.splash__body a:hover {
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  padding: 0 2px;
+}
+
+.splash__controls {
+  margin: 32px 0;
+  padding: 16px 0;
+  border-top: var(--rule-weight) solid var(--grey-300);
+  border-bottom: var(--rule-weight) solid var(--grey-300);
+}
+
+.splash__toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.splash__toggle input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: var(--rule-weight-heavy) solid var(--black);
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.splash__toggle input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--black);
+}
+
+.splash__toggle-label {
+  letter-spacing: 0.05em;
+  color: var(--grey-600);
+}
+
+.splash__enter {
+  margin-top: 24px;
+}

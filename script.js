@@ -8,6 +8,10 @@ const LAB = (() => {
   let entries = [];
   let currentIndex = 0;
   let isIndex = true;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let animationsEnabled = localStorage.getItem('lab-notes-animations')
+    ? localStorage.getItem('lab-notes-animations') !== 'off'
+    : !prefersReducedMotion;
 
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => document.querySelectorAll(sel);
@@ -228,7 +232,7 @@ const LAB = (() => {
 
     // Apply digital rot AFTER DOM is built
     if (entry.rot > 0) {
-      ROT.apply(entry.id, entry.rot, pageFrame);
+      ROT.apply(entry.id, entry.rot, pageFrame, { animate: animationsEnabled });
     }
 
     window.scrollTo(0, 0);
@@ -264,14 +268,86 @@ const LAB = (() => {
     }
   });
 
-  async function init() {
-    await loadManifest();
+  function renderSplash(onContinue) {
+    const content = $('#content');
+    content.innerHTML = `
+      <div class="splash">
+        <div class="doc-header">
+          <div class="doc-header__org">
+            Research Division<br>
+            Documentation Archive
+          </div>
+          <div class="doc-header__classification">Internal</div>
+        </div>
+
+        <div class="splash__body">
+          <h1 class="title-block__title">Lab Notes</h1>
+          <div class="title-block__subtitle" style="margin-bottom: 32px;">Horizon Labs — Research Documentation</div>
+
+          <hr class="ruler--heavy">
+
+          <div class="section" style="margin-top: 32px;">
+            <div class="section__body">
+              <p>This is <a href="https://github.com/oatsandsugar" style="color:var(--black);font-weight:600;">@oatsandsugar</a>'s playthrough of <a href="https://far-horizons-co-op.itch.io/outliers" style="color:var(--black);font-weight:600;">Outliers</a> by Far Horizons Co-op.</p>
+              <p><strong>Spoiler warning.</strong> These notes document an ongoing game. If you intend to play Outliers yourself, reading further may affect your experience.</p>
+              <p>This project contains animations and flashing effects that may be uncomfortable for some viewers.</p>
+            </div>
+          </div>
+
+          <div class="splash__controls">
+            <label class="splash__toggle">
+              <input type="checkbox" id="splash-animations" ${animationsEnabled ? 'checked' : ''}>
+              <span class="splash__toggle-label">Enable animations &amp; effects</span>
+            </label>
+          </div>
+
+          <button class="doc-nav__btn splash__enter" id="splash-enter">
+            Enter Archive
+          </button>
+        </div>
+
+        <div class="doc-footer">
+          <span>Lab Notes Archive</span>
+          <span>${new Date().getFullYear()}</span>
+        </div>
+      </div>
+    `;
+
+    $('#splash-animations').addEventListener('change', (e) => {
+      animationsEnabled = e.target.checked;
+      localStorage.setItem('lab-notes-animations', animationsEnabled ? 'on' : 'off');
+      document.documentElement.classList.toggle('no-animations', !animationsEnabled);
+    });
+
+    $('#splash-enter').addEventListener('click', () => {
+      localStorage.setItem('lab-notes-seen', '1');
+      onContinue();
+    });
+  }
+
+  function proceed() {
     if (!handleHash()) {
       if (entries.length === 1) {
         renderEntry(0);
       } else {
         renderIndex();
       }
+    }
+  }
+
+  async function init() {
+    // Apply animation preference immediately
+    if (!animationsEnabled) {
+      document.documentElement.classList.add('no-animations');
+    }
+
+    await loadManifest();
+
+    const seen = localStorage.getItem('lab-notes-seen');
+    if (!seen) {
+      renderSplash(proceed);
+    } else {
+      proceed();
     }
   }
 
