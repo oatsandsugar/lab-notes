@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Notes — Research Division</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Laboratory research documentation. Internal use only.">
+  <meta name="theme-color" content="#000000">
+  <style>
+    /* Inline critical: prevent FOUC */
+    body { opacity: 0; }
+    body.loaded { opacity: 1; transition: opacity 0.2s; }
+  </style>
+</head>
+<body>
+  <main class="page-frame" role="main">
+    <div id="content" aria-live="polite">
+      <!-- Rendered by script.js -->
+    </div>
+  </main>
+
+  <script src="parse.js"></script>
+  <script src="rot.js"></script>
+  <script src="script.js"></script>
+  <script>document.body.classList.add('loaded');</script>
+</body>
+</html>
