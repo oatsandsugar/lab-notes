@@ -21,7 +21,7 @@ const LAB = (() => {
   }
 
   function formatDocNum(entry) {
-    return `LN-2026-${entry.dayOfYear}`;
+    return `LN-2026-${entry.day}`;
   }
 
   async function loadManifest() {
@@ -55,7 +55,7 @@ const LAB = (() => {
       <li class="index-list__item" data-index="${i}" role="button" tabindex="0">
         <span class="index-list__num">${padId(entry.id)}</span>
         <span class="index-list__title">${entry.title}</span>
-        <span class="index-list__date">${entry.date}</span>
+        <span class="index-list__date">Day ${entry.day}</span>
       </li>
     `).join('');
 
@@ -146,12 +146,8 @@ const LAB = (() => {
 
       <div class="meta-grid">
         <div class="meta-grid__cell">
-          <span class="meta-grid__label">Date</span>
-          <span class="meta-grid__value">${entry.date}</span>
-        </div>
-        <div class="meta-grid__cell">
           <span class="meta-grid__label">Day</span>
-          <span class="meta-grid__value">${entry.dayOfYear}</span>
+          <span class="meta-grid__value">${entry.day}</span>
         </div>
         <div class="meta-grid__cell">
           <span class="meta-grid__label">Specimen</span>
@@ -171,7 +167,7 @@ const LAB = (() => {
         </div>
         <div class="meta-grid__cell">
           <span class="meta-grid__label">Budget Remaining</span>
-          <span class="meta-grid__value">${entry.budget}</span>
+          <span class="meta-grid__value">${entry.budgetEnd}</span>
         </div>
         <div class="meta-grid__cell">
           <span class="meta-grid__label">Researcher</span>

@@ -4,67 +4,80 @@ A daily journal site for [Outliers](https://far-horizons-co-op.itch.io/outliers)
 
 ## Writing a new entry
 
-Add a JSON file to `entries/` named with a zero-padded sequential number:
+Add a Markdown file to `entries/` named with a zero-padded sequential number:
 
 ```
-entries/003.json
+entries/003.md
 ```
 
-The site auto-discovers entries by loading `001.json`, `002.json`, `003.json`, etc. in order until one fails to load. No manifest or config to update.
+The site auto-discovers entries by loading `001.md`, `002.md`, `003.md`, etc. in order until one fails to load. No manifest or config to update.
 
 ### Entry format
 
-```json
-{
-  "id": "003",
-  "date": "2026.03.08",
-  "dayOfYear": "067",
-  "protocol": "STANDARD",
-  "specimen": "0041",
-  "status": "IN PROGRESS",
-  "title": "Entry Title Here",
-  "sections": [
-    {
-      "heading": "Observations",
-      "content": "<p>Your writing goes here. Use HTML tags for formatting.</p><p>Each paragraph in a &lt;p&gt; tag.</p>"
-    },
-    {
-      "heading": "Another Section",
-      "content": "<p>Add as many sections as you want. Name them whatever fits the narrative.</p>"
-    }
-  ],
-  "addendum": "Optional. Rendered as a side-note block. Remove this key to skip it.",
-  "signatures": {
-    "researcher": "[ILLEGIBLE]",
-    "reviewer": "PENDING"
-  }
-}
+```markdown
+---
+id: 003
+day: 003
+protocol: STANDARD
+specimen: 0041
+status: IN PROGRESS
+incidents: 0
+notableEvents: 0
+budgetStart: $14,200.00
+budgetEnd: $13,800.00
+aceTokens: 0
+aceSuit: "—"
+rot: 0
+title: Entry Title Here
+addendum: Optional. Rendered as a side-note block. Remove this key to skip it.
+researcher: "[ILLEGIBLE]"
+reviewer: PENDING
+---
+
+## Observations
+
+Your writing goes here. Use standard Markdown formatting.
+
+Each paragraph is separated by a blank line.
+
+## Another Section
+
+Add as many `##` sections as you want. Name them whatever fits the narrative.
 ```
 
-### Metadata fields
+### Frontmatter fields
 
 | Field | Description |
 |-------|-------------|
 | `id` | Sequential entry number, zero-padded to 3 digits |
-| `date` | In-world date, format `YYYY.MM.DD` |
-| `dayOfYear` | Day number (used in the document number, e.g. `LN-2026-067`) |
+| `day` | Day number, same as `id`. Used in the document number (e.g. `LN-2026-003`) and displayed in the index and metadata grid |
 | `protocol` | Whatever fits the story |
 | `specimen` | Whatever fits the story |
 | `status` | Whatever fits the story |
+| `incidents` | Incident count |
+| `notableEvents` | Number of notable events for the day |
+| `budgetStart` | Budget at start of the day |
+| `budgetEnd` | Budget at end of the day |
+| `aceTokens` | Number of ace tokens |
+| `aceSuit` | Ace suit (e.g. Spades, Hearts, or `"—"` if none) |
+| `rot` | Digital rot level (0–10). Higher values degrade the entry visually |
 | `title` | Entry title shown in the index and header |
-| `sections` | Array of `{ heading, content }` — content is HTML |
 | `addendum` | Optional string, rendered as a callout block |
-| `signatures` | Optional `{ researcher, reviewer }` shown at the bottom |
+| `researcher` | Signature line for the researcher |
+| `reviewer` | Signature line for the reviewer |
 
-### HTML in content
+### Markdown in content
 
-Section content uses raw HTML. Common patterns:
+Section content uses standard Markdown. The built-in parser supports:
 
-- `<p>Paragraph</p>` — paragraphs
-- `<em>italic</em>` — emphasis
-- `<strong>bold</strong>` — strong emphasis
-- `<ul><li>item</li></ul>` — lists
-- `<blockquote>text</blockquote>` — indented quote
+- `**bold**` — strong emphasis
+- `*italic*` or `_italic_` — emphasis
+- `- item` — unordered lists
+- `1. item` — ordered lists
+- `> text` — blockquotes
+- Paragraphs separated by blank lines
+
+Sections are defined by `## Heading` lines. Each heading starts a new section block in the rendered entry.
 
 ## Running locally
 
@@ -86,4 +99,4 @@ Then open `http://localhost:8090`.
 
 ## Design
 
-Black and white. IBM Plex Mono. Respects system dark/light mode. Inspired by Dieter Rams and late-90s corporate documentation.
+Black and white. IBM Plex Mono. Respects system dark/light mode. Inspired by Dieter Rams and late-90s corporate documentation. Entries with higher `rot` values progressively degrade with visual glitches and distortion.

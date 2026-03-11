@@ -136,14 +136,17 @@ const PARSE = (() => {
 
     return {
       id: meta.id || '000',
-      date: meta.date || '',
-      dayOfYear: meta.dayOfYear || meta['day-of-year'] || meta.day || '',
+      day: meta.day || meta.id || '000',
       protocol: meta.protocol || 'STANDARD',
       specimen: meta.specimen || '----',
       status: meta.status || '',
       title: meta.title || 'Untitled',
       incidents: meta.incidents || '0',
-      budget: meta.budget || '—',
+      budgetStart: meta.budgetStart || meta.budget || '—',
+      budgetEnd: meta.budgetEnd || '—',
+      notableEvents: meta.notableEvents || '0',
+      aceTokens: meta.aceTokens || '0',
+      aceSuit: meta.aceSuit || '—',
       rot: parseFloat(meta.rot) || 0,
       addendum: meta.addendum || null,
       signatures: {
