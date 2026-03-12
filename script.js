@@ -162,10 +162,6 @@ const LAB = (() => {
           <span class="meta-grid__value">${entry.status}</span>
         </div>
         <div class="meta-grid__cell">
-          <span class="meta-grid__label">Incidents</span>
-          <span class="meta-grid__value">${entry.incidents}</span>
-        </div>
-        <div class="meta-grid__cell">
           <span class="meta-grid__label">Budget Remaining</span>
           <span class="meta-grid__value">${entry.budgetEnd}</span>
         </div>

@@ -4,11 +4,14 @@ A daily journal site for [Outliers](https://far-horizons-co-op.itch.io/outliers)
 
 ## Writing a new entry
 
-Add a Markdown file to `entries/` named with a zero-padded sequential number:
+Run `./new-entry.sh` to generate the next entry with a blank template:
 
 ```
-entries/003.md
+./new-entry.sh
+# Created entries/003.md
 ```
+
+This auto-detects the next sequential number, creates the file with all frontmatter fields pre-filled, and opens at the `## Observations` section ready to write.
 
 The site auto-discovers entries by loading `001.md`, `002.md`, `003.md`, etc. in order until one fails to load. No manifest or config to update.
 
